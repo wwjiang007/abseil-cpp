@@ -162,9 +162,9 @@
 #error ABSL_HAVE_THREAD_LOCAL cannot be directly set
 #elif !defined(__apple_build_version__) ||   \
     ((__apple_build_version__ >= 8000042) && \
-     !(TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0))
+     !(TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_9_0))
 // Notes: Xcode's clang did not support `thread_local` until version
-// 8, and even then not for iOS < 8.0.
+// 8, and even then not for all iOS < 9.0.
 #define ABSL_HAVE_THREAD_LOCAL 1
 #endif
 
@@ -180,7 +180,7 @@
 #ifdef ABSL_HAVE_INTRINSIC_INT128
 #error ABSL_HAVE_INTRINSIC_INT128 cannot be directly set
 #elif (defined(__clang__) && defined(__SIZEOF_INT128__) &&               \
-       !defined(__ppc64__) && !defined(__aarch64__)) ||                  \
+       !defined(__aarch64__)) ||                                         \
     (defined(__CUDACC__) && defined(__SIZEOF_INT128__) &&                \
      __CUDACC_VER__ >= 70000) ||                                         \
     (!defined(__clang__) && !defined(__CUDACC__) && defined(__GNUC__) && \
@@ -335,7 +335,7 @@
 
 // ABSL_HAVE_STD_ANY
 //
-// Checks whether C++17 std::any is availble by checking whether <any> exists.
+// Checks whether C++17 std::any is available by checking whether <any> exists.
 #ifdef ABSL_HAVE_STD_ANY
 #error "ABSL_HAVE_STD_ANY cannot be directly set."
 #endif
